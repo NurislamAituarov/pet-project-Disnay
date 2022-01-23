@@ -1,0 +1,12 @@
+.wrapper__slider {
+  position: relative;
+  margin-top: 28px;
+}
+
+@media screen and (max-width: 468px) {
+  .wrapper__slider {
+    img {
+      height: 150px;
+    }
+  }
+}
