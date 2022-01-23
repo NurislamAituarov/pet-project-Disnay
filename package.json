@@ -1,6 +1,7 @@
 {
   "name": "my-disney",
   "private": true,
+  "homepage": "https://nurislamaituarov.github.io/pet-project-Disnay",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
