@@ -13,6 +13,7 @@
 .character__first {
   position: relative;
   height: 100%;
+  width: 100%;
   h1 {
     position: absolute;
     top: 25px;
@@ -25,8 +26,12 @@
 .container__img {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  // height: calc(100vh - 72px);
+  height: calc(100vh - 72px);
   position: relative;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  div {
+    position: relative;
+  }
   img {
     transition: 0.3s;
     cursor: pointer;
@@ -47,7 +52,6 @@
 @media (max-width: 768px) {
   .wrapper__search {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
   }
   .character__first {
     height: 400px;
@@ -56,8 +60,9 @@
     }
   }
   .container__img {
+    grid-template-rows: repeat(10, 1fr);
+    height: auto;
     svg {
-      width: 205px;
       height: 183px;
     }
   }
@@ -72,7 +77,11 @@
   // bottom: 0;
   width: 300px;
   height: 100px;
-
+  opacity: 0.3;
+  transition: all 0.3s;
+  &:hover {
+    opacity: 1;
+  }
   .search {
     position: absolute;
     margin: auto;
@@ -184,6 +193,7 @@
 
 @media (max-width: 468px) {
   .container {
-    left: 58px;
+    left: 0;
+    right: 0;
   }
 }

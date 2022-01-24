@@ -51,15 +51,16 @@ export default function Search({ name }) {
           state.map((item, i) => {
             if (item.profile_path) {
               return (
-                <Image
-                  onClick={() => setIndexCharacter(i)}
-                  key={item.id}
-                  src={`${BASE_URL}${item.profile_path}`}
-                  alt="character"
-                  width="200px"
-                  height="200px"
-                  objectFit="cover"
-                />
+                <div>
+                  <Image
+                    onClick={() => setIndexCharacter(i)}
+                    key={item.id}
+                    src={`${BASE_URL}${item.profile_path}`}
+                    alt="character"
+                    objectFit="cover"
+                    layout="fill"
+                  />
+                </div>
               );
             } else {
               return (

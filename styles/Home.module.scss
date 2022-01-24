@@ -132,6 +132,10 @@
 }
 
 @media screen and (max-width: 468px) {
+  .container {
+    // width: 100%;
+    // position: relative;
+  }
   .movie__wrapper_title {
     left: 10px;
   }

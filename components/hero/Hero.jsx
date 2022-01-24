@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import s from './Hero.module.scss';
-import twoImg from '../../public/images/cta-logo-two.png';
+// import twoImg from '../../public/images/cta-logo-two.png';
 
 export default function Hero() {
   return (
@@ -13,7 +13,13 @@ export default function Hero() {
           necessitatibus tempora adipisci asperiores aliquam id, excepturi doloribus ullam eveniet
           nam rem quod aspernatur ipsam accusamus ut?
         </p>
-        <Image className={s.logoTwo} width="600" height="40" src={twoImg} alt="список картинок" />
+        <Image
+          className={s.logoTwo}
+          width="600"
+          height="40"
+          src="/images/cta-logo-two.png"
+          alt="список картинок"
+        />
       </div>
     </div>
   );
