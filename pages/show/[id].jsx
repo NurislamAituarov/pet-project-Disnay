@@ -6,12 +6,15 @@ import Play from '../../components/svg/Play';
 import cn from 'classnames';
 import Group from '../../components/svg/Group';
 import Plus from '../../components/svg/Plus';
+import Added from '../../components/svg/Added';
 
 import s from '../../styles/Home.module.scss';
 import ReactPlayer from 'react-player';
+import Rating from '../../components/rating/Rating';
 
 export default function Show({ result }) {
   const [showPlayer, setShowPlayer] = useState(false);
+  const [addMovie, setAddMovie] = useState(0);
 
   const BASE_URL = 'https://image.tmdb.org/t/p/original';
   const index = showPlayer && result.videos.results.findIndex((el) => el.type === 'Trailer');
@@ -44,13 +47,14 @@ export default function Show({ result }) {
             <Play color="white" />
             <button>Tailer</button>
           </div>
-          <div className={s.movie__wrapper_svg}>
-            <Plus width="25" height="25" />
+          <div onClick={() => setAddMovie(addMovie + 1)} className={s.movie__wrapper_svg}>
+            {!addMovie ? <Plus width="25" height="25" /> : <Added />}
           </div>
           <div className={s.movie__wrapper_svg}>
             <Group color="white" />
           </div>
         </div>
+        <Rating />
         <p className={s.subtitle}>
           {result.release_date || result.first_air_date}
           {'  '}

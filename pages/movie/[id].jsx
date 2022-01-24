@@ -6,17 +6,19 @@ import Play from '../../components/svg/Play';
 import cn from 'classnames';
 import Group from '../../components/svg/Group';
 import Plus from '../../components/svg/Plus';
+import Rating from '../../components/rating/Rating';
+import Added from '../../components/svg/Added';
 
 import s from '../../styles/Home.module.scss';
 import ReactPlayer from 'react-player';
 
 export default function Movie({ result }) {
   const [showPlayer, setShowPlayer] = useState(false);
-
+  const [addMovie, setAddMovie] = useState(0);
   const BASE_URL = 'https://image.tmdb.org/t/p/original';
 
   const index = showPlayer && result.videos.results.findIndex((el) => el.type === 'Trailer');
-  s;
+
   return (
     <MainLayout title={result.title || result.original_title} session>
       <div style={showPlayer ? { opacity: '0.3' } : { opacity: '1' }} className={s.movie__wrapper}>
@@ -45,13 +47,14 @@ export default function Movie({ result }) {
             <Play color="white" />
             <button>Tailer</button>
           </div>
-          <div className={s.movie__wrapper_svg}>
-            <Plus width="25" height="25" />
+          <div onClick={() => setAddMovie(addMovie + 1)} className={s.movie__wrapper_svg}>
+            {!addMovie ? <Plus width="25" height="25" /> : <Added />}
           </div>
           <div className={s.movie__wrapper_svg}>
             <Group color="white" />
           </div>
         </div>
+        <Rating />
         <p className={s.subtitle}>
           {result.release_date || result.first_air_date}
           {'  '}

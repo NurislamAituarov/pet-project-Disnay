@@ -1,0 +1,11 @@
+.wrapper__rating {
+  margin-top: 20px;
+  cursor: pointer;
+  svg {
+    transition: 0.3s;
+  }
+}
+
+.star {
+  fill: rgb(251, 255, 0);
+}
