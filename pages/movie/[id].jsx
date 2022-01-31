@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import MainLayout from '../../layout/MainLayout';
@@ -12,11 +12,17 @@ import Added from '../../components/svg/Added';
 import s from '../../styles/Home.module.scss';
 import ReactPlayer from 'react-player';
 
-export default function Movie({ result }) {
-  const [showPlayer, setShowPlayer] = useState(false);
-  const [addMovie, setAddMovie] = useState(0);
-  const BASE_URL = 'https://image.tmdb.org/t/p/original';
+import { addedList } from '../../redux/Slice';
+import { useDispatch, useSelector } from 'react-redux';
 
+export default function Movie({ result }) {
+  const { watchListMovie } = useSelector((state) => state.reducer);
+  const item = watchListMovie.filter((el) => el.id === result.id);
+
+  const [showPlayer, setShowPlayer] = useState(false);
+  const dispatch = useDispatch();
+
+  const BASE_URL = 'https://image.tmdb.org/t/p/original';
   const index = showPlayer && result.videos.results.findIndex((el) => el.type === 'Trailer');
 
   return (
@@ -25,10 +31,7 @@ export default function Movie({ result }) {
         <Image
           objectFit="cover"
           layout="fill"
-          src={
-            `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
-            `${BASE_URL}${result.poster_path}`
-          }
+          src={`${BASE_URL}${result.poster_path}`}
           alt={result.name}
         />
       </div>
@@ -47,14 +50,18 @@ export default function Movie({ result }) {
             <Play color="white" />
             <button>Tailer</button>
           </div>
-          <div onClick={() => setAddMovie(addMovie + 1)} className={s.movie__wrapper_svg}>
-            {!addMovie ? <Plus width="25" height="25" /> : <Added />}
+          <div
+            onClick={() => {
+              dispatch(addedList(result));
+            }}
+            className={s.movie__wrapper_svg}>
+            {!item.length ? <Plus width="25" height="25" /> : <Added />}
           </div>
           <div className={s.movie__wrapper_svg}>
             <Group color="white" />
           </div>
         </div>
-        <Rating />
+        <Rating vote_average={result.vote_average} />
         <p className={s.subtitle}>
           {result.release_date || result.first_air_date}
           {'  '}

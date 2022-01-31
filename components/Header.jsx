@@ -13,8 +13,11 @@ import s from './Header.module.scss';
 import cn from 'classnames';
 import BurgerMenu from './burger-menu/BurgerMenu';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Header({ session, setSession }) {
+  const { watchListMovie } = useSelector((state) => state.reducer);
+
   const [hamburgerClick, setHamburgerClick] = useState(false);
   const router = useRouter();
   const navRef = useRef();
@@ -27,6 +30,10 @@ export default function Header({ session, setSession }) {
     }
     resize();
     window.addEventListener('resize', resize);
+
+    return () => {
+      window.removeEventListener('resize', resize);
+    };
   }, [hamburgerClick]);
 
   return (
@@ -67,10 +74,12 @@ export default function Header({ session, setSession }) {
                 <span className={cn(s.span)}>Search</span>
               </a>
             </Link>
-            <Link href="/future">
+            <Link href="/watchList">
               <a className={s.home_svg}>
                 <Plus />
-                <span className={s.span}>WatchList</span>
+                <span className={s.span}>
+                  WatchList <b>{watchListMovie.length}</b>
+                </span>
               </a>
             </Link>
             <Link href="/future">

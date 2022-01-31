@@ -2,13 +2,31 @@ import { useEffect, useState } from 'react';
 import s from './Rating.module.scss';
 import cn from 'classnames';
 
-export default function Rating() {
+export default function Rating({ vote_average }) {
   const [rating, setRating] = useState(0);
   const [arrayRating, setArrayRating] = useState(new Array(5).fill(<></>));
 
   useEffect(() => {
     constructorRating(rating);
   }, [rating]);
+
+  useEffect(() => {
+    if (vote_average > 1) {
+      setRating(1);
+    }
+    if (vote_average > 3) {
+      setRating(2);
+    }
+    if (vote_average > 4) {
+      setRating(3);
+    }
+    if (vote_average > 7) {
+      setRating(4);
+    }
+    if (vote_average > 9) {
+      setRating(5);
+    }
+  }, [vote_average]);
 
   function changeDisplay(num) {
     constructorRating(num);

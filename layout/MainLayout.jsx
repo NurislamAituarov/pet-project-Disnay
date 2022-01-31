@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import Header from '../components/Header';
 import s from '../styles/Home.module.scss';
 import Hero from '../components/hero/Hero';
